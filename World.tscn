@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://World.gd" type="Script" id=1]
 [ext_resource path="res://tileset.png" type="Texture" id=2]
+[ext_resource path="res://Map.gd" type="Script" id=3]
 
 [sub_resource type="TileSet" id=1]
 0/name = "tileset.png 0"
@@ -43,6 +44,15 @@ cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
 format = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2( 255, 150 )
+offset = Vector2( 400, 300 )
 current = true
-zoom = Vector2( 0.5, 0.5 )
+zoom = Vector2( 0.75, 0.75 )
+
+[node name="Node2D" type="Node2D" parent="."]
+script = ExtResource( 3 )
+tile_size_x = 8
+tile_size_y = 8
+paths_to_tiles = [ "res://Sprites/Tiles/tile003.png", "res://Sprites/Tiles/tile007.png", "res://Sprites/Tiles/tile002.png" ]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.603922, 0.603922, 0.603922, 1 )
