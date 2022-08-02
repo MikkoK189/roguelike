@@ -14,47 +14,55 @@ func _ready():
 #	print(chunkmanager.current_chunk.get_node("Map"))
 
 func _process(delta):
-	if Input.is_action_pressed("down"):
+	if Input.is_action_pressed("upleft") || Input.is_action_pressed("up") && Input.is_action_pressed("left"):
 		if can_move:
-			var move_pos = Vector2(0, 1)
+			var move_pos = Vector2(-1, -1)
 			move(move_pos)
-			can_move = false
-			timer.start()
-	if Input.is_action_pressed("left"):
+	elif Input.is_action_pressed("downleft") || Input.is_action_pressed("down") && Input.is_action_pressed("left"):
+		if can_move:
+			var move_pos = Vector2(-1, 1)
+			move(move_pos)
+	elif Input.is_action_pressed("downright") || Input.is_action_pressed("down") && Input.is_action_pressed("right"):
+		if can_move:
+			var move_pos = Vector2(1, 1)
+			move(move_pos)
+	elif Input.is_action_pressed("upright") || Input.is_action_pressed("up") && Input.is_action_pressed("right"):
+		if can_move:
+			var move_pos = Vector2(1, -1)
+			move(move_pos)
+	elif Input.is_action_pressed("left"):
 		if can_move:
 			var move_pos = Vector2(-1, 0)
 			move(move_pos)
-			can_move = false
-			timer.start()
-	if Input.is_action_pressed("up"):
+	elif Input.is_action_pressed("up"):
 		if can_move:
 			var move_pos = Vector2(0, -1)
 			move(move_pos)
-			can_move = false
-			timer.start()
-	if Input.is_action_pressed("right"):
+	elif Input.is_action_pressed("right"):
 		if can_move:
 			var move_pos = Vector2(1, 0)
 			move(move_pos)
-			can_move = false
-			timer.start()
+	elif Input.is_action_pressed("down"):
+		if can_move:
+			var move_pos = Vector2(0, 1)
+			move(move_pos)
+
+			
 
 func move(pos : Vector2):
 	var map = world.chunkmanager.get_current_chunk(self.global_position).get_node("Map")
 	var x = self.global_position.x / 8 + pos.x - (chunkmanager.current_chunk.x * chunkmanager.chunk_size / 8)
 	var y = self.global_position.y / 8 + pos.y - (chunkmanager.current_chunk.y * chunkmanager.chunk_size / 8)
-	if(world.chunkmanager.current_chunk != world.chunkmanager.get_current_chunk(Vector2(self.global_position.x + (pos.x * 8), self.global_position.y + (pos.y * 8) + 1)).chunk_coords):
-		var newchunk = world.chunkmanager.get_current_chunk(Vector2(self.global_position.x + (pos.x * 8), self.global_position.y + (pos.y * 8) + 1))
+	if(world.chunkmanager.current_chunk != world.chunkmanager.get_current_chunk(Vector2(self.global_position.x + (pos.x * 8) + 1, self.global_position.y + (pos.y * 8) + 1)).chunk_coords):
+		var newchunk = world.chunkmanager.get_current_chunk(Vector2(self.global_position.x + (pos.x * 8) + 1, self.global_position.y + (pos.y * 8) + 1))
 		map = newchunk.get_node("Map")
 		x = self.global_position.x / 8 + pos.x - (newchunk.chunk_coords.x * chunkmanager.chunk_size / 8)
 		y = self.global_position.y / 8 + pos.y - (newchunk.chunk_coords.y * chunkmanager.chunk_size / 8)
 		print("YEET")
-#	if y >= world.size:
-#			y = 0
-#	if x >= world.size:
-#			x = 0
 	if (map.get_tile(Vector2(x, y)) != 0):
 		self.global_position += pos * 8
+		can_move = false
+		timer.start()
 	else:
 		return
 
