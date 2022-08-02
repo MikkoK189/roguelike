@@ -6,6 +6,7 @@
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
+size = 10
 chunkmanager_path = NodePath("ChunkManager")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
@@ -18,4 +19,3 @@ world_path = NodePath("..")
 render_distance = 6
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
-position = Vector2( 512, 264 )

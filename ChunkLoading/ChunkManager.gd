@@ -93,8 +93,8 @@ func load_chunk():
 				active_chunks.append(chunk)
 				active_coord.append(chunk_coords)
 				chunk.world = world
-				chunk.start(chunk_key)
 				add_child(chunk)
+				chunk.start(chunk_key)
 				
 	#deleting the chunks just makes an array of chunks that are in active chunks and not in the
 	#chunks that are being loaded (loading coords), deleting chunks then deletes them from 

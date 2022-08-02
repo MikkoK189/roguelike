@@ -15,7 +15,6 @@ func start(_chunk_coords):
 		world.generate_world(world.size, $Map, chunk_coords)
 		WorldSave.add_chunk(chunk_coords)
 	else:
-		chunk_data = WorldSave.retrive_data(chunk_coords)
 		world.generate_world(world.size, $Map, chunk_coords)
 
 

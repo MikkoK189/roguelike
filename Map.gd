@@ -3,15 +3,18 @@ extends Node2D
 onready var chunk = get_parent()
 
 var tile_textures = []
-
 var tiles = {}
+var sampleTile
+
+func _init():
+	sampleTile = preload("res://Tile.tscn")
 
 func set_cell(x, y, index):
 	if(index == -1):
 		if(tiles.has(Vector2(x, y))):
 			tiles[Vector2(x, y)].queue_free()
 	elif(index >= 0):
-		var sprite = preload("res://Tile.tscn").instance()
+		var sprite = sampleTile.instance()
 		sprite.visible = false
 		tiles[Vector2(x, y)] = sprite
 		sprite.texture = Tiles.tile_textures[index]
@@ -28,7 +31,7 @@ func set_cellm(x, y, index, col):
 		if(tiles.has(Vector2(x, y))):
 			tiles[Vector2(x, y)].queue_free()
 	elif(index >= 0):
-		var sprite = preload("res://Tile.tscn").instance()
+		var sprite = sampleTile.instance()
 		sprite.visible = false
 		tiles[Vector2(x, y)] = sprite
 		sprite.texture = Tiles.tile_textures[index]
