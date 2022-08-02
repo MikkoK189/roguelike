@@ -6,6 +6,8 @@ export var tile_offset_x = 0
 export var tile_offset_y = 0
 
 export var paths_to_tiles = [""]
+
+onready var tileSample = preload("res://Tile.tscn")
 var tile_textures = []
 
 var tiles = {}
@@ -19,13 +21,14 @@ func set_cell(x, y, index):
 		if(tiles.has(Vector2(x, y))):
 			tiles[Vector2(x, y)].queue_free()
 	elif(index >= 0):
-		var sprite = Sprite.new()
+		var sprite = tileSample.instance()
 		sprite.visible = false
 		tiles[Vector2(x, y)] = sprite
 		sprite.texture = tile_textures[index]
 		sprite.position.x = (x * tile_size_x) + tile_offset_x
 		sprite.position.y = (y * tile_size_y) + tile_offset_y
 		sprite.visible = true
+		sprite.id = index
 		add_child(sprite)
 	else:
 		get_tree().quit()
@@ -35,7 +38,7 @@ func set_cellm(x, y, index, col):
 		if(tiles.has(Vector2(x, y))):
 			tiles[Vector2(x, y)].queue_free()
 	elif(index >= 0):
-		var sprite = Sprite.new()
+		var sprite = tileSample.instance()
 		sprite.visible = false
 		tiles[Vector2(x, y)] = sprite
 		sprite.texture = tile_textures[index]
@@ -43,6 +46,7 @@ func set_cellm(x, y, index, col):
 		sprite.position.y = (y * tile_size_y) + (tile_size_y / 2) + tile_offset_y
 		sprite.modulate = col
 		sprite.visible = true
+		sprite.id = index
 		add_child(sprite)
 	else:
 		get_tree().quit()
@@ -50,3 +54,10 @@ func set_cellm(x, y, index, col):
 func set_cell_modulate(x, y, col):
 	if(tiles.has(Vector2(x, y))):
 		tiles[Vector2(x, y)].modulate = col
+
+func get_tile(x, y):
+	if(tiles.has(Vector2(x, y))):
+		return tiles[Vector2(x, y)].id
+
+func get_map_position(pos : Vector2):
+	pass
