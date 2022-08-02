@@ -17,6 +17,8 @@ config/icon="res://icon.png"
 [autoload]
 
 WorldSave="*res://ChunkLoading/WorldSave.gd"
+Globals="*res://Globals.gd"
+Tiles="*res://Tiles.tscn"
 
 [importer_defaults]
 

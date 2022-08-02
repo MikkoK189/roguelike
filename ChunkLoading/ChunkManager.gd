@@ -2,18 +2,20 @@ extends Node2D
 
 #I want each chunk to have a parent node which is going to be the chunknode.
 #It's going to be instanced in everychunk that hasn't been loaded.
-const chunknode = preload("res://ChunkLoading/ChunkNode.tscn")
+const chunknode = preload("res://Chunk.tscn")
 
 #References to the player so I can track the location.
 export (NodePath) var player_path
 var player
+export (NodePath) var world_path
+var world
 
 #The render distance in the max length and bredth of chunks that can be loaded.
 #the chunk size is the size of the chunk obviously.
 #current chunk stores the current chunk the player is in.
 export (int) var render_distance = 3
-export (float) var chunk_size = 80
-var current_chunk = Vector2()
+var chunk_size
+var current_chunk = Vector2(0, 0)
 var previous_chunk = Vector2()
 var chunk_loaded = false
 
@@ -28,7 +30,10 @@ onready var active_chunks = []
 #In the ready func the world script checks if the chunks within the render distance have been loaded
 #and if not then they are loaded
 func _ready():
+	yield(get_tree(), "idle_frame")
 	player = get_node(player_path)
+	world = get_node(world_path)
+	chunk_size = world.size * 8
 	current_chunk = _get_player_chunk(player.global_position)
 	load_chunk()
 
@@ -41,6 +46,11 @@ func _process(_delta):
 	else:
 		chunk_loaded = false
 	previous_chunk = current_chunk
+	
+func get_current_chunk(pos):
+	for chunk in active_chunks:
+		if (chunk.chunk_coords == _get_player_chunk(pos)):
+			return chunk
 
 #This converts the players position to it's chunk coordinates
 #subtracting one from the range lerp just makes sure that the chunk is actually changed when it's on
@@ -82,8 +92,10 @@ func load_chunk():
 				chunk.position = chunk_coords * chunk_size
 				active_chunks.append(chunk)
 				active_coord.append(chunk_coords)
+				chunk.world = world
 				chunk.start(chunk_key)
 				add_child(chunk)
+				
 	#deleting the chunks just makes an array of chunks that are in active chunks and not in the
 	#chunks that are being loaded (loading coords), deleting chunks then deletes them from 
 	#both the active chunk and coords array

@@ -1,35 +1,25 @@
 extends Node2D
 
-export var tile_size_x = 32
-export var tile_size_y = 32
-export var tile_offset_x = 0
-export var tile_offset_y = 0
+onready var chunk = get_parent()
 
-export var paths_to_tiles = [""]
-
-onready var tileSample = preload("res://Tile.tscn")
 var tile_textures = []
 
 var tiles = {}
-
-func _ready():
-	for tile in paths_to_tiles:
-		tile_textures.append(load(tile))
 
 func set_cell(x, y, index):
 	if(index == -1):
 		if(tiles.has(Vector2(x, y))):
 			tiles[Vector2(x, y)].queue_free()
 	elif(index >= 0):
-		var sprite = tileSample.instance()
+		var sprite = preload("res://Tile.tscn").instance()
 		sprite.visible = false
 		tiles[Vector2(x, y)] = sprite
-		sprite.texture = tile_textures[index]
-		sprite.position.x = (x * tile_size_x) + tile_offset_x
-		sprite.position.y = (y * tile_size_y) + tile_offset_y
+		sprite.texture = Tiles.tile_textures[index]
+		sprite.position.x = (x * Tiles.tile_size_x) + Tiles.tile_offset_x
+		sprite.position.y = (y * Tiles.tile_size_y) + Tiles.tile_offset_y
 		sprite.visible = true
 		sprite.id = index
-		add_child(sprite)
+		call_deferred("add_child", sprite)
 	else:
 		get_tree().quit()
 
@@ -38,12 +28,12 @@ func set_cellm(x, y, index, col):
 		if(tiles.has(Vector2(x, y))):
 			tiles[Vector2(x, y)].queue_free()
 	elif(index >= 0):
-		var sprite = tileSample.instance()
+		var sprite = preload("res://Tile.tscn").instance()
 		sprite.visible = false
 		tiles[Vector2(x, y)] = sprite
-		sprite.texture = tile_textures[index]
-		sprite.position.x = (x * tile_size_x) + (tile_size_x / 2) + tile_offset_x
-		sprite.position.y = (y * tile_size_y) + (tile_size_y / 2) + tile_offset_y
+		sprite.texture = Tiles.tile_textures[index]
+		sprite.position.x = (x * Tiles.tile_size_x) + (Tiles.tile_size_x / 2) + Tiles.tile_offset_x
+		sprite.position.y = (y * Tiles.tile_size_y) + (Tiles.tile_size_y / 2) + Tiles.tile_offset_y
 		sprite.modulate = col
 		sprite.visible = true
 		sprite.id = index
@@ -55,9 +45,12 @@ func set_cell_modulate(x, y, col):
 	if(tiles.has(Vector2(x, y))):
 		tiles[Vector2(x, y)].modulate = col
 
-func get_tile(x, y):
-	if(tiles.has(Vector2(x, y))):
-		return tiles[Vector2(x, y)].id
+func get_tile(pos):
+	var local = pos
+	print(local)
+	if(tiles.has(Vector2(local.x, local.y))):
+		return tiles[Vector2(local.x, local.y)].id
+	pass
 
 func get_map_position(pos : Vector2):
 	pass
