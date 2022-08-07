@@ -2,12 +2,13 @@ extends Node2D
 var noise = OpenSimplexNoise.new()
 var map_seed
 
-export var size = 5
+export var world_size = 5
 var world = []
 export (NodePath) onready var chunkmanager_path
 var chunkmanager
 
 func _ready():
+	Globals.world = self
 	randomize()
 	map_seed = randi()
 	chunkmanager = get_node(chunkmanager_path)

@@ -22,7 +22,7 @@ var chunk_loaded = false
 #revolution distance is the distance at which the player must move on the axis in chunk coords
 #in order for one revolution to be achived.
 export (bool) var circumnavigation = false
-export (float) var revolution_distance = 8
+export (int) var revolution_distance = 8
 
 onready var active_coord = []
 onready var active_chunks = []
@@ -30,10 +30,11 @@ onready var active_chunks = []
 #In the ready func the world script checks if the chunks within the render distance have been loaded
 #and if not then they are loaded
 func _ready():
+	Globals.chunkmanager = self
 	yield(get_tree(), "idle_frame")
 	player = get_node(player_path)
 	world = get_node(world_path)
-	chunk_size = world.size * 8
+	chunk_size = world.world_size * 8
 	current_chunk = _get_player_chunk(player.global_position)
 	load_chunk()
 

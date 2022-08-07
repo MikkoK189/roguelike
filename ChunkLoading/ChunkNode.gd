@@ -12,10 +12,10 @@ func start(_chunk_coords):
 	chunk_coords = _chunk_coords
 #	$Coords.text = str(chunk_coords)
 	if WorldSave.loaded_coords.find(_chunk_coords) == -1:
-		world.generate_world(world.size, $Map, chunk_coords)
+		world.generate_world(world.world_size, $Map, chunk_coords)
 		WorldSave.add_chunk(chunk_coords)
 	else:
-		world.generate_world(world.size, $Map, chunk_coords)
+		world.generate_world(world.world_size, $Map, chunk_coords)
 
 
 func save():

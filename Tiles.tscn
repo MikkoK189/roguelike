@@ -5,3 +5,4 @@
 [node name="Tiles" type="Node2D"]
 script = ExtResource( 1 )
 paths_to_tiles = [ "res://Sprites/Tiles/tile003.png", "res://Sprites/Tiles/tile007.png", "res://Sprites/Tiles/tile002.png" ]
+obstacle_tiles = [ 0 ]

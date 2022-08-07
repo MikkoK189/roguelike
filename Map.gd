@@ -49,11 +49,6 @@ func set_cell_modulate(x, y, col):
 		tiles[Vector2(x, y)].modulate = col
 
 func get_tile(pos):
-	var local = pos
-	print(local)
-	if(tiles.has(Vector2(local.x, local.y))):
-		return tiles[Vector2(local.x, local.y)].id
-	pass
-
-func get_map_position(pos : Vector2):
+	if(tiles.has(Vector2(pos.x, pos.y))):
+		return tiles[Vector2(pos.x, pos.y)].id
 	pass

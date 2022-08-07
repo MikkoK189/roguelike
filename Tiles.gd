@@ -6,6 +6,7 @@ export var tile_size_x = 8
 export var tile_size_y = 8
 export var tile_offset_x = 0
 export var tile_offset_y = 0
+export (Array, int) var obstacle_tiles
 
 onready var tileSample = preload("res://Tile.tscn")
 onready var chunk = get_parent()
