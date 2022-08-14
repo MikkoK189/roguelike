@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Creature",
 "language": "GDScript",
 "path": "res://Scripts/Creature.gd"
+}, {
+"base": "Node2D",
+"class": "Pathfinding",
+"language": "GDScript",
+"path": "res://Pathfinding.gd"
 } ]
 _global_script_class_icons={
-"Creature": ""
+"Creature": "",
+"Pathfinding": ""
 }
 
 [application]
