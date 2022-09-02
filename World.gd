@@ -17,6 +17,8 @@ func _ready():
 	noise.octaves = 4
 	noise.period = 20.0
 	noise.persistence = 0.8
+	yield(get_tree(), "idle_frame")
+	Globals.pathfinding.create_navigation_map(self)
 	pass
 
 
