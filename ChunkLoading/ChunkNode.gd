@@ -7,6 +7,9 @@ var chunk_coords = Vector2()
 var chunk_data = []
 var colors #0
 
+# TODO
+# Make chunks add their own tiles to pathfinding
+# And then connect those tiles
 
 func start(_chunk_coords):
 	chunk_coords = _chunk_coords
