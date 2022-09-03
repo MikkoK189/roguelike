@@ -11,3 +11,5 @@ script = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Tile" parent="." instance=ExtResource( 3 )]
+
+[connection signal="finished_generating" from="." to="Map" method="_on_Chunk_finished_generating"]

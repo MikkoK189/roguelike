@@ -2,7 +2,7 @@ extends Node2D
 class_name Pathfinding
 
 
-export var map_size = 100
+#export var map_size = 100
 var astar = AStar2D.new()
 #var tilemap: TileMap
 #var used_rect: Rect2
@@ -14,35 +14,37 @@ func _ready():
 	Globals.pathfinding = self
 
 func create_navigation_map(map):
-	add_traversable_tiles()
-	connect_traversable_tiles()
-	set_navigation_walls()
+	#add_traversable_tiles()
+	#connect_traversable_tiles()
+	#set_navigation_walls()
 	print(astar.get_points())
 
-func add_traversable_tiles():
-	for x in map_size:
-		for y in map_size:
-			var id = get_id_for_point(Vector2(x, y))
-			astar.add_point(id, Vector2(x, y))
+#func add_traversable_tiles():
+#	for x in map_size:
+#		for y in map_size:
+#			var id = get_id_for_point(Vector2(x, y))
+#			astar.add_point(id, Vector2(x, y))
 
 func add_cell(x, y):
-	pass
+	var id = get_id_for_point(Vector2(x, y))
+	astar.add_point(id, Vector2(x, y))
+	print("ADDED CELL:")
+	print(x, y)
 
 
-func connect_traversable_tiles():
-	for x in map_size:
-		for y in map_size:
-			var id = get_id_for_point(Vector2(x, y))
-			# Get coordinates of neighboring tiles
-			for _x in range(3):
-				for _y in range(3):
-					var target = Vector2(x, y) + Vector2(_x - 1, _y - 1)
-					var target_id = get_id_for_point(target)
-					
-					if Vector2(x, y) == target or not astar.has_point(target_id):
-						continue
-					
-					astar.connect_points(id, target_id, true)
+func connect_traversable_tiles(tiles : Array):
+	for tile in tiles:
+		var id = get_id_for_point(tile)
+		# Get coordinates of neighboring tiles
+		for _x in range(3):
+			for _y in range(3):
+				var target = tile + Vector2(_x - 1, _y - 1)
+				var target_id = get_id_for_point(target)
+				
+				if tile == target or not astar.has_point(target_id):
+					continue
+				
+				astar.connect_points(id, target_id, true)
 
 
 func set_navigation_walls():
