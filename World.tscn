@@ -30,4 +30,4 @@ __meta__ = {
 }
 
 [node name="Critter" parent="." instance=ExtResource( 5 )]
-position = Vector2( 0, 8 )
+position = Vector2( 128, 64 )

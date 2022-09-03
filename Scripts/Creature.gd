@@ -2,6 +2,7 @@ extends Node2D
 class_name Creature
 
 export var health = 10
+export var is_player = false
 var world
 var chunkmanager
 var can_move = true
@@ -10,6 +11,8 @@ func _ready():
 	yield(get_tree(), "idle_frame")
 	chunkmanager = Globals.chunkmanager
 	world = Globals.world
+	if !is_player:
+		Globals.connect("player_action_taken", self, "_take_turn")
 
 func _move(pos : Vector2):
 	var map = world.chunkmanager.get_current_chunk(self.global_position).get_node("Map")
@@ -27,3 +30,7 @@ func _move(pos : Vector2):
 		can_move = false
 	else:
 		return
+
+func _take_turn():
+	print("My turn")
+	pass

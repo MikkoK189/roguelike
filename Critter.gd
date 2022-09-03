@@ -19,13 +19,12 @@ func _process(_delta):
 			if(path):
 				move_pos = Vector2(path[0].x - x,path[0].y - y)
 		_move(move_pos)
-
 		moved = true
-		$Timer.start()
 	elif(!path || path.size() < 7 || global_position.distance_to(player.global_position) > 10 * Tiles.tile_size_x):
 		path = Globals.pathfinding.get_new_path(Vector2(x, y), player.global_position)
 	pass
 
-
-func _on_Timer_timeout():
+func _take_turn():
+	._take_turn()
 	moved = false
+	pass
