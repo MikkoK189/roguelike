@@ -10,6 +10,7 @@ var wallpoints: Array
 var points_gone_through = 0
 var thread
 
+
 func _ready():
 	Globals.pathfinding = self
 
@@ -25,9 +26,12 @@ func create_navigation_map(map):
 #			var id = get_id_for_point(Vector2(x, y))
 #			astar.add_point(id, Vector2(x, y))
 
-func add_cell(x, y):
+func add_cell(x, y, wall):
 	var id = get_id_for_point(Vector2(x, y))
-	astar.add_point(id, Vector2(x, y))
+	if (wall):
+		astar.add_point(id, Vector2(x, y), 1.0)
+	else:
+		astar.add_point(id, Vector2(x, y), 0)
 	print("ADDED CELL:")
 	print(Vector2(x, y))
 
@@ -85,10 +89,9 @@ func update_navigation_map():
 
 
 func get_id_for_point(point: Vector2):
-	var x = point.x + Tiles.tile_size_x / 2
-	var y = point.y * 256
-	
-	return x + y * 126
+	var x = point.x * 3 + Tiles.tile_size_x / 2
+	var y = point.y * 3 * Tiles.tile_size_y / 4
+	return abs(x + y * 126)
 
 
 # Both start and end are world coordinated
