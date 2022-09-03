@@ -14,26 +14,12 @@ var thread
 func _ready():
 	Globals.pathfinding = self
 
-func create_navigation_map(map):
-	#add_traversable_tiles()
-	#connect_traversable_tiles()
-	#set_navigation_walls()
-	print(astar.get_points())
-
-#func add_traversable_tiles():
-#	for x in map_size:
-#		for y in map_size:
-#			var id = get_id_for_point(Vector2(x, y))
-#			astar.add_point(id, Vector2(x, y))
-
 func add_cell(x, y, wall):
 	var id = get_id_for_point(Vector2(x, y))
 	if (wall):
-		astar.add_point(id, Vector2(x, y), 1.0)
+		return
 	else:
 		astar.add_point(id, Vector2(x, y), 0)
-	print("ADDED CELL:")
-	print(Vector2(x, y))
 
 
 func connect_traversable_tiles(tiles : Array):

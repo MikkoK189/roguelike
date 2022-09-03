@@ -41,7 +41,3 @@ func get_inputs():
 
 func timer_timeout():
 	can_move = true
-	var x = self.global_position.x / Tiles.tile_size_x 
-	var y = self.global_position.y / Tiles.tile_size_y
-	print("PLAYER POS:")
-	print(Vector2(x, y))

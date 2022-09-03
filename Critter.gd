@@ -9,17 +9,15 @@ func _ready():
 	player = Globals.player
 	pass
 
-func _process(delta):
+func _process(_delta):
 	var x = self.global_position.x / Tiles.tile_size_x 
 	var y = self.global_position.y / Tiles.tile_size_y
 	if(path && !moved):
 		var move_pos = Vector2(path[0].x - x,path[0].y - y)
 		if(move_pos == Vector2(0, 0)):
-			print("NUOLOL")
 			path.remove(0)
 			if(path):
 				move_pos = Vector2(path[0].x - x,path[0].y - y)
-		print(move_pos)
 		_move(move_pos)
 
 		moved = true
@@ -30,5 +28,4 @@ func _process(delta):
 
 
 func _on_Timer_timeout():
-	print("Move timer")
 	moved = false

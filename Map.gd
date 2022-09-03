@@ -55,18 +55,15 @@ func get_tile(pos):
 	for tile in tiles:
 		if(tile.pos == pos):
 			return tile.spr.id
-	#if(tiles.has(Vector2(pos.x, pos.y))):
-	#	return tiles[Vector2(pos.x, pos.y)].id
 	pass
 
 
 func _on_Chunk_finished_generating():
 	var tile_coords = []
 	for tile in tiles:
-		#Globals.pathfinding.add_cell(tile.value)
 		if(Tiles.obstacle_tiles.has(tile.spr.id)):
-			Globals.pathfinding.add_cell(tile.spr.global_position.x / Tiles.tile_size_x, tile.spr.global_position.y / Tiles.tile_size_y, true)
+			continue
 		else:
 			Globals.pathfinding.add_cell(tile.spr.global_position.x / Tiles.tile_size_x, tile.spr.global_position.y / Tiles.tile_size_y, false)
-		tile_coords.append(Vector2(tile.spr.global_position.x / Tiles.tile_size_x, tile.spr.global_position.y / Tiles.tile_size_y))
+			tile_coords.append(Vector2(tile.spr.global_position.x / Tiles.tile_size_x, tile.spr.global_position.y / Tiles.tile_size_y))
 	Globals.pathfinding.connect_traversable_tiles(tile_coords)
