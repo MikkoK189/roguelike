@@ -35,6 +35,7 @@ config/icon="res://icon.png"
 WorldSave="*res://ChunkLoading/WorldSave.gd"
 Globals="*res://Globals.gd"
 Tiles="*res://Tiles.tscn"
+TaskRunner="*res://Scripts/TaskRunner.gd"
 
 [importer_defaults]
 

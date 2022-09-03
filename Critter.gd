@@ -22,6 +22,7 @@ func _process(_delta):
 		moved = true
 	elif(!path || path.size() < 7 || global_position.distance_to(player.global_position) > 10 * Tiles.tile_size_x):
 		path = Globals.pathfinding.get_new_path(Vector2(x, y), player.global_position)
+		print(path)
 	pass
 
 func _take_turn():

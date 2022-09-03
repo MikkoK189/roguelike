@@ -3,6 +3,7 @@ extends Creature
 onready var timer = $Timer
 
 func _ready():
+	OS.center_window()
 	is_player = true
 	Globals.player = self
 	timer.connect("timeout", self, "timer_timeout")

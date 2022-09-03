@@ -2,14 +2,7 @@ extends Node2D
 class_name Pathfinding
 
 
-#export var map_size = 100
 var astar = AStar2D.new()
-#var tilemap: TileMap
-#var used_rect: Rect2
-var wallpoints: Array
-var points_gone_through = 0
-var thread
-
 
 func _ready():
 	Globals.pathfinding = self
@@ -26,11 +19,10 @@ func connect_traversable_tiles(tiles : Array):
 	for tile in tiles:
 		var id = get_id_for_point(tile)
 		# Get coordinates of neighboring tiles
-		for _x in range(3):
-			for _y in range(3):
-				var target = tile + Vector2(_x - 1, _y - 1)
+		for _x in range(-1, 2):
+			for _y in range(-1, 2):
+				var target = tile + Vector2(_x, _y)
 				var target_id = get_id_for_point(target)
-				
 				if tile == target or not astar.has_point(target_id):
 					continue
 				

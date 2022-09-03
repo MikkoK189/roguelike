@@ -6,6 +6,9 @@ export var world_size = 5
 var world = []
 export (NodePath) onready var chunkmanager_path
 var chunkmanager
+var generate_tasks = []
+signal finished_generation
+var signal_emitted = false
 
 func _ready():
 	Globals.world = self
@@ -20,6 +23,21 @@ func _ready():
 	yield(get_tree(), "idle_frame")
 	pass
 
+#func _process(delta):
+#	if(generate_tasks.size() > 0):
+#		if(!generate_tasks[0].target.get_ref()):
+#			generate_tasks.remove(0)
+#			return
+#		generate_world(generate_tasks[0].size, generate_tasks[0].target.get_ref(), generate_tasks[0].offset)
+#		generate_tasks[0].source.emit_signal("finished_generating")
+#		generate_tasks.remove(0)
+#	elif(generate_tasks.size() <= 0 && !signal_emitted):
+#		emit_signal("finished_generation")
+#		print("FINISH")
+#		signal_emitted = true
+
+func add_generate_task(_source, _size, _target, _offset : Vector2):
+	generate_tasks.append({source = _source, size = _size, target = weakref(_target), offset = _offset})
 
 func generate_world(size, target, offset : Vector2):
 	for x in size:

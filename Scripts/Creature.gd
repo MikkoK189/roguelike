@@ -8,11 +8,14 @@ var chunkmanager
 var can_move = true
 
 func _ready():
+	set_process(false)
 	yield(get_tree(), "idle_frame")
 	chunkmanager = Globals.chunkmanager
 	world = Globals.world
+#	yield(world, "finished_generation")
 	if !is_player:
 		Globals.connect("player_action_taken", self, "_take_turn")
+	set_process(true)
 
 func _move(pos : Vector2):
 	var map = world.chunkmanager.get_current_chunk(self.global_position).get_node("Map")

@@ -20,7 +20,6 @@ func start(_chunk_coords):
 		world.generate_world(world.world_size, $Map, chunk_coords)
 		WorldSave.add_chunk(chunk_coords)
 		emit_signal("finished_generating")
-		
 	else:
 		world.generate_world(world.world_size, $Map, chunk_coords)
 		emit_signal("finished_generating")
