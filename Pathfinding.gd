@@ -29,7 +29,7 @@ func add_cell(x, y):
 	var id = get_id_for_point(Vector2(x, y))
 	astar.add_point(id, Vector2(x, y))
 	print("ADDED CELL:")
-	print(x, y)
+	print(Vector2(x, y))
 
 
 func connect_traversable_tiles(tiles : Array):
