@@ -7,8 +7,8 @@ var world = []
 export (NodePath) onready var chunkmanager_path
 var chunkmanager
 var generate_tasks = []
-signal finished_generation
-var signal_emitted = false
+#signal finished_generation
+#var signal_emitted = false
 
 func _ready():
 	Globals.world = self
@@ -56,6 +56,6 @@ func generate_world(size, target, offset : Vector2):
 				target.set_cellm(x, y, 2, Color("#00AAC0"))
 				#target.set_cell_modulate(x, y, Color("#00AAC0"))
 			if (val > 0.15):
-				target.set_cellm(x, y, 0, Color("#67AF66"))
+				target.set_cellm(x, y, 1, Color("#67AF66"))
 			if (val > 0.25):
-				target.set_cellm(x, y, 0, Color("#94C793"))
+				target.set_cellm(x, y, 1, Color("#94C793"))

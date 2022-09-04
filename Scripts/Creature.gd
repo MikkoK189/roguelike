@@ -21,7 +21,7 @@ func _move(pos : Vector2):
 	var map = world.chunkmanager.get_current_chunk(self.global_position).get_node("Map")
 	var x = self.global_position.x / Tiles.tile_size_x + pos.x - (chunkmanager.current_chunk.x * chunkmanager.chunk_size / Tiles.tile_size_x)
 	var y = self.global_position.y / Tiles.tile_size_y + pos.y - (chunkmanager.current_chunk.y * chunkmanager.chunk_size / Tiles.tile_size_y)
-	if(world.chunkmanager.current_chunk != world.chunkmanager.get_current_chunk(Vector2(self.global_position.x + (pos.x * Tiles.tile_size_x) + 1, self.global_position.y + (pos.y * Tiles.tile_size_y) + 1)).chunk_coords):
+	if(world.chunkmanager.get_current_chunk(self.global_position).chunk_coords != world.chunkmanager.get_current_chunk(Vector2(self.global_position.x + (pos.x * Tiles.tile_size_x) + 1, self.global_position.y + (pos.y * Tiles.tile_size_y) + 1)).chunk_coords):
 		var newchunk = world.chunkmanager.get_current_chunk(Vector2(self.global_position.x + (pos.x * Tiles.tile_size_x) + 1, self.global_position.y + (pos.y * Tiles.tile_size_y) + 1))
 		map = newchunk.get_node("Map")
 		x = self.global_position.x / Tiles.tile_size_x + pos.x - (newchunk.chunk_coords.x * chunkmanager.chunk_size / Tiles.tile_size_x)
